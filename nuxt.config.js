@@ -61,11 +61,14 @@ module.exports = {
       options: {
         expires: 30
       }
+    },
+    redirect: {
+      logout: '/login',
     }
   },
-  // router: {
-  //   middleware: ['auth']
-  // },
+  router: {
+    middleware: ['auth']
+  },
   /*
   ** Axios module configuration
   */

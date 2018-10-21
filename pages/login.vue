@@ -1,19 +1,27 @@
 <template>
 	<section class="login-form-container">
-		<div class="login-form">
+		<form class="login-form" @submit.prevent="login">
 			<h1 class="is-primary">Iniciar sesión</h1>
+
+			<p class="alert" v-for="error in errors.non_field_errors" :key="error">
+        {{ error }}
+      </p>
+
 		  <b-field label="Nombre de usuario">
-	      <b-input value="johnsilver" autofocus></b-input>
+	      <b-input v-model="username" autofocus></b-input>
 		  </b-field>
+	    <span class="error" v-for="error in errors.username" :key="error">{{ error }}</span>
+
 		  <b-field label="Contraseña">
-	      <b-input type="password"></b-input>
+	      <b-input type="password" v-model="password"></b-input>
 		  </b-field>
+	    <span class="error" v-for="error in errors.password" :key="error">{{ error }}</span>
 
 		  <div class="submit-button">
-		  	<button class="button is-primary" :disabled="submitting" @click="login">Iniciar sesión</button>
+		  	<button type="submit" class="button is-primary" :disabled="submitting">Iniciar sesión</button>
 		  </div>
 
-		</div>
+		</form>
 	</section>
 </template>
 
@@ -39,7 +47,6 @@ export default {
           }
         })
       } catch (e) {
-        console.log('e', e)
         this.errors = e.response.data
         this.submitting = false
         return
@@ -71,10 +78,18 @@ h1 {
 	border: 1px solid #dbdfe1;
 	border-radius: 7.5px;
 	width: 500px;
-	height: 350px;
+	height: auto;
 }
 .submit-button {
 	margin-top: 2em;
 	text-align: center;
+}
+.alert {
+	background-color: #ffc9c9;
+  padding: 1em;
+  color: #dc5c5c;
+}
+.error {
+  color: #dc5c5c;
 }
 </style>

@@ -21,7 +21,7 @@
 	      	:class="{ 'link-active': $route.name === 'index' }">Lista de tickets</nuxt-link>
 
 	      <a class="navbar-item">
-					<button class="button">Salir</button>
+					<button class="button" @click="logout">Salir</button>
 	       </a>
 	    </div>
 	  </div>
@@ -38,6 +38,13 @@ export default {
 		return {
 			toggle: false
 		}
+	},
+
+	methods: {
+		async logout() {
+      await this.$auth.logout()
+      // this.$router.push('/')
+    }
 	}
 }
 </script>
